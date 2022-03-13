@@ -117,8 +117,13 @@
               "devServerTarget": "Blog-Angular-FireBase:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
-    }},
+    }
+  },
   "defaultProject": "Blog-Angular-FireBase"
 }

@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "angular-blog-b443b": {
+      "hosting": {
+        "Blog-Angular-FireBase": [
+          "angular-blog-b443b"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "angular-blog-b443b"
+  }
+}
