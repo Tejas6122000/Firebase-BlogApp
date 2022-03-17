@@ -3,8 +3,8 @@
         <h1>Hello: {{email}}</h1>
     </div>
     <div>
-        <!-- <button (click)="getAll()" class="btn btn-secondary mr-5">Get All Blogs</button>
-        <Button (click)="getOwn()" class="btn btn-secondary">Own Blogs</Button> -->
+        <button (click)="getAll()" class="btn btn-secondary mr-5">Get All Blogs</button>
+        <Button (click)="getOwn()" class="btn btn-secondary">Own Blogs</Button>
         <table class="table">
             <thead>
                 <tr>
@@ -17,7 +17,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let blog of blogs; let i=index">
+                <tr *ngFor="let blog of blogDisplay; let i=index">
                     <th scope="row">{{i+1}}</th>
                     <td>{{blog.title}}</td>
                     <td>{{blog.author}}</td>

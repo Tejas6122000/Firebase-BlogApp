@@ -13,16 +13,24 @@ import { Observable } from 'rxjs';
   styleUrls: ['./blogs.component.css']
 })
 export class BlogsComponent implements OnInit {
-  blogs: Blog[]
+  blogs: Blog[];
+  blogDisplay:Blog[];
   email: string;
   constructor(
         private auth: AngularFireAuth,
         private blogService: BlogFunctionsService,
         ){}
+  getAll(){
+    this.blogDisplay= this.blogs;
+    }
+  getOwn(){
+    this.blogDisplay = this.blogs.filter(blog=> blog.author==this.email);
+  }
+
 
   ngOnInit(){
     this.blogService.getBlogList().subscribe(res=>{
-      this.blogs = res.map(e=>{
+      this.blogDisplay =this.blogs = res.map(e=>{
         return{
           id: e.payload.doc.id,
           ...e.payload.doc.data() as{}
@@ -40,6 +48,8 @@ export class BlogsComponent implements OnInit {
   removeBlog(blog){
       this.blogService.deleteBlog(blog);
   }
+
+  
 
 }  
 // export class BlogsComponent implements OnInit {
