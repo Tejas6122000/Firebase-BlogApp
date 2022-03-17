@@ -5,6 +5,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Blog } from '../blog.model';
 import { BlogFunctionsService } from '../service/blog-functions.service';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -19,6 +21,7 @@ export class BlogsComponent implements OnInit {
   constructor(
         private auth: AngularFireAuth,
         private blogService: BlogFunctionsService,
+        private router: Router
         ){}
   getAll(){
     this.blogDisplay= this.blogs;
@@ -29,6 +32,9 @@ export class BlogsComponent implements OnInit {
 
 
   ngOnInit(){
+    if(!localStorage.getItem('token')){
+      this.router.navigate(['/login']);
+    }
     this.blogService.getBlogList().subscribe(res=>{
       this.blogDisplay =this.blogs = res.map(e=>{
         return{

@@ -13,7 +13,7 @@ export class AuthService {
 
   login(email: string,password: string){
     this.auth.signInWithEmailAndPassword(email,password).then(()=>{
-      localStorage.setItem('token','true')
+      localStorage.setItem('token','true');
       this.router.navigate(['/blogs']);
     },err=>{
       alert('Something Went Wrong');

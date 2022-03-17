@@ -5,6 +5,7 @@ import { BlogFunctionsService } from '../service/blog-functions.service'
 import { AngularFireAuth } from '@angular/fire/auth';
 
 
+
 @Component({
   selector: 'app-create-blog',
   templateUrl: './create-blog.component.html',
@@ -27,6 +28,9 @@ export class CreateBlogComponent implements OnInit {
      }
 
   ngOnInit(): void {
+    if(!localStorage.getItem('token')){
+      this.router.navigate(['/login']);
+    }
     this.auth.user.subscribe((user)=>{
       this.email=user.email;
     });

@@ -3,7 +3,7 @@
         <h1>Hello: {{email}}</h1>
     </div>
     <div>
-        <button (click)="getAll()" class="btn btn-secondary mr-5">Get All Blogs</button>
+        <button (click)="getAll()" class="btn btn-secondary mx-3">Get All Blogs</button>
         <Button (click)="getOwn()" class="btn btn-secondary">Own Blogs</Button>
         <table class="table">
             <thead>
@@ -23,7 +23,7 @@
                     <td>{{blog.author}}</td>
                     <td>{{blog.description}}</td>
                     <td>{{blog.body}}</td>
-                    <td>
+                    <td *ngIf="blog.author == email">
                         <span (click)="removeBlog(blog)" class="btn btn-danger">Delete</span>
                     </td>
 
