@@ -9,10 +9,10 @@ import firebase from 'firebase/app';
 })
 export class AuthService {
 
-  constructor(private auth: AngularFireAuth, private router: Router) { }
+  constructor(private afAuth: AngularFireAuth, private router: Router) { }
 
   login(email: string,password: string){
-    this.auth.signInWithEmailAndPassword(email,password).then(()=>{
+    this.afAuth.signInWithEmailAndPassword(email,password).then(()=>{
       localStorage.setItem('token','true');
       this.router.navigate(['/blogs']);
     },err=>{
@@ -22,7 +22,7 @@ export class AuthService {
   }
 
   register(email:string,password:string){
-    this.auth.createUserWithEmailAndPassword(email,password).then(()=>{
+    this.afAuth.createUserWithEmailAndPassword(email,password).then(()=>{
       alert('Registeration Successful');
       this.router.navigate(['/login']);
     },err=>{
@@ -32,7 +32,7 @@ export class AuthService {
   }
 
   logout(){
-    this.auth.signOut().then(()=>{
+    this.afAuth.signOut().then(()=>{
       localStorage.removeItem('token');
       this.router.navigate(['/login']);
     },err=>{
@@ -40,21 +40,26 @@ export class AuthService {
     })
   }
 
-  async googleSign() {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    const credential = await this.auth.signInWithPopup(provider);
-    return 
-  }
-  googleSignIn(){
-    return this.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider())
-    .then((res)=>{
+  // async googleSign() {
+  //   const provider = new firebase.auth.GoogleAuthProvider();
+  //   const credential = await this.auth.signInWithPopup(provider);
+  //   return 
+  // }
 
-      this.router.navigate(['/blogs'])
-      localStorage.setItem('token','true');
-    },err=>{
-      alert(err.message);
-    })
-    }
+  // googleSignIn(){
+  //   return this.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider())
+  //   .then((res)=>{
+
+  //     this.router.navigate(['/blogs'])
+  //     localStorage.setItem('token','true');
+  //   },err=>{
+  //     alert(err.message);
+  //   })
+  //   }
+  async  googleSign(){
+    await  this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
+    this.router.navigate(['admin/list']);
+}
 
 
 }
